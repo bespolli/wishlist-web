@@ -38,6 +38,18 @@ export async function registerRequest(name: string, email: string, password: str
   return data; // { accessToken, user: { id, name, email, role } }
 }
 
+// Send Google login request, return token + user data
+export async function googleLoginRequest(credential: string) {
+  const res = await fetch(`${API}/auth/google`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ credential }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Google login failed');
+  return data; // { accessToken, user: { id, name, email, role } }
+}
+
 // === WISH REQUESTS ===
 
 // Fetch paginated list of wishes, optionally filtered by search query

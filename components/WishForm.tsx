@@ -15,11 +15,13 @@ export default function WishForm({ onCreated }: WishFormProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // Handle form submission
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     try {
       await createWish(token, title, description);
@@ -28,6 +30,8 @@ export default function WishForm({ onCreated }: WishFormProps) {
       onCreated(); // tell parent to refresh the list
     } catch (err: any) {
       setError(err.message || 'Failed to create wish');
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -50,7 +54,9 @@ export default function WishForm({ onCreated }: WishFormProps) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <button type="submit" className="btn">Create</button>
+        <button type="submit" className="btn" disabled={loading}>
+        {loading ? '⏳ Creating...' : 'Create'}
+        </button>
       {error && <p className="form-error">{error}</p>}
     </form>
   );
