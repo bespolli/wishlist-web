@@ -104,3 +104,37 @@ export async function searchArt(query: string) {
   // API returns either an array or an object with "artworks" field
   return Array.isArray(data) ? data : data.artworks || [];
 }
+
+// === PAYMENT REQUESTS ===
+
+// Create a checkout session, return Stripe URL
+export async function createCheckoutSession(token: string | null, amount: number) {
+  const res = await fetch(`${API}/payment/checkout`, {
+    method: 'POST',
+    headers: authHeaders(token),
+    body: JSON.stringify({ amount }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to create checkout session');
+  return data; // { sessionId, url }
+}
+
+// Get user balance
+export async function getBalance(token: string | null) {
+  const res = await fetch(`${API}/payment/balance`, {
+    headers: authHeaders(token),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to get balance');
+  return data; // { balanceAvailable, balancePending, balanceTotal }
+}
+
+// Get transaction history
+export async function getTransactions(token: string | null) {
+  const res = await fetch(`${API}/payment/transactions`, {
+    headers: authHeaders(token),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Failed to get transactions');
+  return data; // Transaction[]
+}
