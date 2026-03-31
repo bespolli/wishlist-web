@@ -74,7 +74,7 @@ export default function PaymentPage() {
 
   return (
     <div style={{ maxWidth: 600, margin: '2rem auto', padding: '0 1rem' }}>
-    <h1 style={{ marginBottom: '1.5rem' }}>Payment</h1>
+    <h1 style={{ marginBottom: '1.5rem' }}>Payments</h1>
 
       {/* Balance Card */}
       {balance && (

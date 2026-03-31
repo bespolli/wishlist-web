@@ -10,7 +10,6 @@ export default function PaymentSuccess() {
       textAlign: 'center',
       padding: '2rem',
     }}>
-      <div style={{ fontSize: 64 }}>✅</div>
       <h1>Payment Successful!</h1>
       <p style={{ color: '#666', marginBottom: '2rem' }}>
         Your balance has been topped up. It may take a few moments to reflect.
@@ -27,7 +26,7 @@ export default function PaymentSuccess() {
           fontWeight: 'bold',
         }}
       >
-        Back to Payment
+        Back to Payments
       </Link>
     </div>
   );

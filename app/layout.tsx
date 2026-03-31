@@ -1,13 +1,12 @@
 import './globals.css';
 import { AuthProvider } from '../context/AuthContext';
+import Navbar from '../components/Navbar';
 
-// Page metadata (title + description for browser tab and SEO)
 export const metadata = {
   title: 'Wishlist App',
   description: 'Create and manage your wish list',
 };
 
-// Root layout — wraps ALL pages in the app
 export default function RootLayout({
   children,
 }: {
@@ -17,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
+          <Navbar />
           {children}
         </AuthProvider>
       </body>
