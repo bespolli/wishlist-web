@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import { createCheckoutSession, getBalance, getTransactions } from '../../lib/api';
 
 interface Balance {
@@ -19,7 +19,7 @@ interface Transaction {
 }
 
 export default function PaymentPage() {
-  const { token } = useContext(AuthContext);
+  const { token } = useAuth();
   const [amount, setAmount] = useState('');
   const [balance, setBalance] = useState<Balance | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
